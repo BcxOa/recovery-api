@@ -13,7 +13,7 @@ mongoose.connect(MONGO_URI)
 const serverSchema = new mongoose.Schema({
   name: { type: String, required: true },
   ip: { type: String, required: true },
-  port: { type: Number, default: 22023 }
+  port: { type: Number, default: 443 }
 }, { collection: 'Rec' });
 
 const ServerModel = mongoose.model('Server', serverSchema);
@@ -23,7 +23,7 @@ app.get('/api/servers', async (req, res) => {
     const servers = await ServerModel.find({}, { _id: 0, __v: 0 });
     if (!servers || servers.length === 0) {
       return res.json([
-        { name: "Nodo Backup Oficial", ip: "127.0.0.1", port: 22023 }
+        { name: "Nodo Backup Oficial", ip: "https://matchmaker.among.us", port: 443 }
       ]);
     }
     res.json(servers);
